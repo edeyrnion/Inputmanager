@@ -5,11 +5,11 @@ using UnityEngine;
 namespace Matthias.ControllerInput
 {
     /// <summary>Interface into the Input system.</summary>
-    public static class ControllerInput
+    public class ControllerInput
     {
-        private static List<ContollerProfile> controllerProfiles;
+        private List<ContollerProfile> controllerProfiles;
 
-        static ControllerInput()
+        public ControllerInput()
         {
             controllerProfiles = new List<ContollerProfile>();
 
@@ -31,16 +31,16 @@ namespace Matthias.ControllerInput
         /// <summary>Returns the value of the axis identified by axisName.</summary>
         /// <param name="axisName">The name of the axis.</param>
         /// <returns>The value of the axis.</returns>
-        public static float GetAxis(ControllerAxis axisName)
+        public float GetAxis(ControllerAxis axisName)
         {
             float result = 0f;
-            float temp = 0f;
             int count = controllerProfiles.Count;
 
             for (int i = 0; i < count; i++)
             {
                 var axis = controllerProfiles[i].Axis;
-                temp = Axis.GetAxis(axis[(int)axisName]);
+
+                var temp = Axis.GetAxis(axis[(int)axisName]);
 
                 if (Mathf.Abs(temp) > Mathf.Abs(result))
                 {
@@ -55,7 +55,7 @@ namespace Matthias.ControllerInput
         /// <param name="key1Name">The name of the positive key.</param>
         /// <param name="key2Name">The name of the negative key.</param>
         /// <returns>The value of the virtual axis.</returns>
-        public static float GetVirtualAxis(KeyCode key1Name, KeyCode key2Name)
+        public float GetVirtualAxis(KeyCode key1Name, KeyCode key2Name)
         {
             bool value1 = Input.GetKey(key1Name);
             bool value2 = Input.GetKey(key2Name);
@@ -69,7 +69,7 @@ namespace Matthias.ControllerInput
         /// <summary>Returns true while the button identified by buttonName is held down.</summary>
         /// <param name="buttonName">The name of the button.</param>
         /// <returns>True when an button has been pressed and not released.</returns>
-        public static bool GetButton(ControllerButton buttonName)
+        public bool GetButton(ControllerButton buttonName)
         {
             bool result = false;
             int count = controllerProfiles.Count;
@@ -89,7 +89,7 @@ namespace Matthias.ControllerInput
         /// <summary>Returns true during the frame the user pressed down the button identified by buttonName.</summary>
         /// <param name="buttonName">The name of the button.</param>
         /// <returns>True when an button has been pressed.</returns>
-        public static bool GetButtonDown(ControllerButton buttonName)
+        public bool GetButtonDown(ControllerButton buttonName)
         {
             bool result = false;
             int count = controllerProfiles.Count;
@@ -109,7 +109,7 @@ namespace Matthias.ControllerInput
         /// <summary>Returns true the first frame the user releases the button identified by buttonName.</summary>
         /// <param name="buttonName">The name of the button.</param>
         /// <returns>True when an button has been released.</returns>
-        public static bool GetButtonUp(ControllerButton buttonName)
+        public bool GetButtonUp(ControllerButton buttonName)
         {
             bool result = false;
             int count = controllerProfiles.Count;
@@ -130,7 +130,7 @@ namespace Matthias.ControllerInput
         /// <summary>Returns true while the key identified by keyName is held down.</summary>
         /// <param name="keyName">The name of the key.</param>
         /// <returns>True when an key has been pressed and not released.</returns>
-        public static bool GetKey(KeyCode keyName)
+        public bool GetKey(KeyCode keyName)
         {
             bool result = false;
             result = Input.GetKey(keyName);
@@ -141,7 +141,7 @@ namespace Matthias.ControllerInput
         /// <summary>Returns true during the frame the user pressed down the key identified by keyName.</summary>
         /// <param name="keyName">The name of the key.</param>
         /// <returns>True when an key has been pressed.</returns>
-        public static bool GetKeyDown(KeyCode keyName)
+        public bool GetKeyDown(KeyCode keyName)
         {
             bool result = false;
             result = Input.GetKeyDown(keyName);
@@ -152,7 +152,7 @@ namespace Matthias.ControllerInput
         /// <summary>Returns true the first frame the user releases the key identified by keyName.</summary>
         /// <param name="keyName">The name of the key.</param>
         /// <returns>True when an key has been released.</returns>
-        public static bool GetKeyUp(KeyCode keyName)
+        public bool GetKeyUp(KeyCode keyName)
         {
             bool result = false;
             result = Input.GetKeyUp(keyName);
@@ -161,7 +161,10 @@ namespace Matthias.ControllerInput
         }
 
         //---------------------------------------------------------------------------------
-        public static List<ControllerButton> GetAllButtons()
+        //  DEBUG STUFF
+        //---------------------------------------------------------------------------------
+
+        public List<ControllerButton> GetAllButtons()
         {
             var buttons = new List<ControllerButton>();
             int count = Enum.GetValues(typeof(ControllerButton)).Length;
@@ -177,7 +180,7 @@ namespace Matthias.ControllerInput
             return buttons;
         }
 
-        public static List<ControllerButton> GetAllButtonsUp()
+        public List<ControllerButton> GetAllButtonsUp()
         {
             var buttons = new List<ControllerButton>();
             int count = Enum.GetValues(typeof(ControllerButton)).Length;
@@ -193,7 +196,7 @@ namespace Matthias.ControllerInput
             return buttons;
         }
 
-        public static List<ControllerButton> GetAllButtonsDown()
+        public List<ControllerButton> GetAllButtonsDown()
         {
             var buttons = new List<ControllerButton>();
             int count = Enum.GetValues(typeof(ControllerButton)).Length;
@@ -209,7 +212,7 @@ namespace Matthias.ControllerInput
             return buttons;
         }
 
-        public static Dictionary<ControllerAxis, float> GetAllAxis()
+        public Dictionary<ControllerAxis, float> GetAllAxis()
         {
             var axis = new Dictionary<ControllerAxis, float>();
             int count = Enum.GetValues(typeof(ControllerAxis)).Length;

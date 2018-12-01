@@ -11,8 +11,12 @@ public class GamepadTest : MonoBehaviour
     private Dictionary<Renderer, Color> btnColor;
     private Dictionary<Transform, Vector3> axisPos;
 
+    private ControllerInput controllerInput;
+
     private void Start()
     {
+        controllerInput = new ControllerInput();
+
         buttons = new Dictionary<ControllerButton, Renderer>();
         axis = new Dictionary<ControllerAxis, Transform>();
 
@@ -57,18 +61,12 @@ public class GamepadTest : MonoBehaviour
 
     private void Update()
     {
-        var btnsReleased = ControllerInput.GetAllButtonsUp();
-        int btnRCount = btnsReleased.Count;
-        for (int i = 0; i < btnRCount; i++)
+        foreach (var button in buttons)
         {
-            var btnReleased = btnsReleased[i];
-            if (buttons.ContainsKey(btnReleased))
-            {
-                buttons[btnReleased].material.color = btnColor[buttons[btnReleased]];
-            }
+            button.Value.material.color = btnColor[button.Value];
         }
 
-        var btnsPressed = ControllerInput.GetAllButtons();
+        var btnsPressed = controllerInput.GetAllButtons();
         int btnPCount = btnsPressed.Count;
         for (int i = 0; i < btnPCount; i++)
         {
@@ -79,7 +77,7 @@ public class GamepadTest : MonoBehaviour
             }
         }
 
-        var axisPushed = ControllerInput.GetAllAxis();
+        var axisPushed = controllerInput.GetAllAxis();
 
         float valueLX = axisPushed[ControllerAxis.LStick_X];
         float valueLY = axisPushed[ControllerAxis.LStick_Y];

@@ -1,61 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Collections.Generic;
 
 namespace Matthias.ControllerInput
 {
     public partial class ContollerProfile
     {
-        public string Name { get; private set; }
-        public IReadOnlyDictionary<int, Axis> Axis => axis;
-        public IReadOnlyDictionary<int, Button> Buttons => buttons;
-
-        private Dictionary<int, Axis> axis;
-        private Dictionary<int, Button> buttons;
-
-        private readonly string prefix;
-
-        private Dictionary<string, Action> profiles;
-
-        public ContollerProfile() : this("Default", 1) { }
-
-        public ContollerProfile(string controllerName, int controllerNumber)
+        private void Xbox_One_Profile_Init()
         {
-            if (string.IsNullOrEmpty(controllerName))
-            {
-                controllerName = "Default";
-            }
-
-            prefix = "joystick " + controllerNumber + " ";
-            profiles = new Dictionary<string, Action>();
-
-            MethodInfo[] methodInfo = typeof(ContollerProfile).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
-            for (int i = 0; i < methodInfo.Length; i++)
-            {
-                if (methodInfo[i].Name.Contains("Init"))
-                {
-                    methodInfo[i].Invoke(this, null);
-                }
-            }
-
-            if (profiles.ContainsKey(controllerName))
-            {
-                profiles[controllerName].Invoke();
-            }
-            else
-            {
-                Default_Profile();
-            }
+            profiles.Add("Controller (Xbox One For Windows)", Xbox_One_Profile);
         }
 
-        private void Default_Profile_Init()
+        private void Xbox_One_Profile()
         {
-            profiles.Add("", Default_Profile);
-        }
-
-        private void Default_Profile()
-        {
-            Name = "Default";
+            Name = "Xbox One";
 
             axis = new Dictionary<int, Axis>
             {
