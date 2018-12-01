@@ -1,4 +1,4 @@
-﻿namespace Matthias.ControllerInput
+﻿namespace Matthias.Inputmanager
 {
     /// <summary>Available gamepad axis.</summary>
     public enum ControllerAxis

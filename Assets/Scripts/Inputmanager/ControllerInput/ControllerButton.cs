@@ -1,4 +1,4 @@
-﻿namespace Matthias.ControllerInput
+﻿namespace Matthias.Inputmanager
 {
     /// <summary>Available gamepad buttons.</summary>
     public enum ControllerButton

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Matthias.ControllerInput
+namespace Matthias.Inputmanager
 {
     public struct Axis
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Matthias.ControllerInput;
+using Matthias.Inputmanager;
 
 public class GamepadTest : MonoBehaviour
 {

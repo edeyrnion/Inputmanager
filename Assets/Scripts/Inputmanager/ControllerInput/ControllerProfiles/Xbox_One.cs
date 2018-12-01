@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Matthias.ControllerInput
+namespace Matthias.Inputmanager
 {
     public partial class ContollerProfile
     {

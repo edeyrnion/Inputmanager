@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Matthias.ControllerInput
+namespace Matthias.Inputmanager
 {
     /// <summary>Interface into the Input system.</summary>
     public class ControllerInput

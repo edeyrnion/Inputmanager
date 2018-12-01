@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Matthias.ControllerInput
+namespace Matthias.Inputmanager
 {
     public partial class ContollerProfile
     {
