@@ -12,8 +12,6 @@ namespace Matthias.ControllerInput
         public bool FromePositiveAxis { get; set; }
         public bool FromeNegativeAxis { get; set; }
 
-        private static bool buttonPressed;
-
         public static bool GetButton(Button button)
         {
             bool result = false;
@@ -26,10 +24,10 @@ namespace Matthias.ControllerInput
                     axisValue *= -1f;
 
                 if (button.FromePositiveAxis)
-                    result = axisValue < 0.1f;
+                    result = axisValue > 0.2f;
 
                 if (button.FromeNegativeAxis)
-                    result = axisValue > 0.1f;
+                    result = axisValue < -0.2f;
             }
             else
             {
@@ -43,10 +41,13 @@ namespace Matthias.ControllerInput
         {
             bool result = false;
 
-            if (!GetButton(button) && buttonPressed)
+            if (button.IsVirtual)
             {
-                buttonPressed = false;
-                result = true;
+
+            }
+            else
+            {
+                result = Input.GetKeyUp(button.ButtonName);
             }
 
             return result;
@@ -56,10 +57,13 @@ namespace Matthias.ControllerInput
         {
             bool result = false;
 
-            if (GetButton(button) && !buttonPressed)
+            if (button.IsVirtual)
             {
-                buttonPressed = true;
-                result = true;
+
+            }
+            else
+            {
+                result = Input.GetKeyDown(button.ButtonName);
             }
 
             return result;

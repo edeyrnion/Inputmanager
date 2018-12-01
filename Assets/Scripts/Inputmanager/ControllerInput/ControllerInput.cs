@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +31,7 @@ namespace Matthias.ControllerInput
         /// <summary>Returns the value of the axis identified by axisName.</summary>
         /// <param name="axisName">The name of the axis.</param>
         /// <returns>The value of the axis.</returns>
-        public static float GetAxes(ControllerdAxis axisName)
+        public static float GetAxis(ControllerAxis axisName)
         {
             float result = 0f;
             float temp = 0f;
@@ -56,13 +55,13 @@ namespace Matthias.ControllerInput
         /// <param name="key1Name">The name of the positive key.</param>
         /// <param name="key2Name">The name of the negative key.</param>
         /// <returns>The value of the virtual axis.</returns>
-        public static float GetVirtualAxes(KeyCode key1Name, KeyCode key2Name)
+        public static float GetVirtualAxis(KeyCode key1Name, KeyCode key2Name)
         {
             bool value1 = Input.GetKey(key1Name);
             bool value2 = Input.GetKey(key2Name);
 
             int result = value1.CompareTo(value2);
-            result = Mathf.Clamp(result, -1, 1);
+            //result = Mathf.Clamp(result, -1, 1);
 
             return result;
         }
@@ -118,8 +117,9 @@ namespace Matthias.ControllerInput
             for (int i = 0; i < count; i++)
             {
                 var btn = controllerProfiles[i].Buttons;
-                if (result = Button.GetButtonUp(btn[(int)buttonName]))
+                if (Button.GetButtonUp(btn[(int)buttonName]))
                 {
+                    result = true;
                     break;
                 }
             }
@@ -158,6 +158,68 @@ namespace Matthias.ControllerInput
             result = Input.GetKeyUp(keyName);
 
             return result;
+        }
+
+        //---------------------------------------------------------------------------------
+        public static List<ControllerButton> GetAllButtons()
+        {
+            var buttons = new List<ControllerButton>();
+            int count = Enum.GetValues(typeof(ControllerButton)).Length;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (GetButton((ControllerButton)i))
+                {
+                    buttons.Add((ControllerButton)i);
+                }
+            }
+
+            return buttons;
+        }
+
+        public static List<ControllerButton> GetAllButtonsUp()
+        {
+            var buttons = new List<ControllerButton>();
+            int count = Enum.GetValues(typeof(ControllerButton)).Length;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (GetButtonUp((ControllerButton)i))
+                {
+                    buttons.Add((ControllerButton)i);
+                }
+            }
+
+            return buttons;
+        }
+
+        public static List<ControllerButton> GetAllButtonsDown()
+        {
+            var buttons = new List<ControllerButton>();
+            int count = Enum.GetValues(typeof(ControllerButton)).Length;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (GetButtonDown((ControllerButton)i))
+                {
+                    buttons.Add((ControllerButton)i);
+                }
+            }
+
+            return buttons;
+        }
+
+        public static Dictionary<ControllerAxis, float> GetAllAxis()
+        {
+            var axis = new Dictionary<ControllerAxis, float>();
+            int count = Enum.GetValues(typeof(ControllerAxis)).Length;
+
+            for (int i = 0; i < count; i++)
+            {
+                float value = GetAxis((ControllerAxis)i);
+                axis.Add((ControllerAxis)i, value);
+            }
+            return axis;
         }
     }
 }

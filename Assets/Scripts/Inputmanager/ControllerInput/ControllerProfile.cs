@@ -100,10 +100,10 @@ namespace Matthias.ControllerInput
                 { 9, new Button { ButtonName = prefixB + "button 9" } }, // Start
                 { 10, new Button { ButtonName = prefixB + "button 10" } }, // Left Stick
                 { 11, new Button { ButtonName = prefixB + "button 11" } }, // Right Stick
-                { 12, new Button { IsVirtual = true, AxisName = "Axis7", FromeNegativeAxis = true, } }, // DPad Left
-                { 13, new Button { IsVirtual = true, AxisName = "Axis8", FromeNegativeAxis = true, } }, // DPad Down
-                { 14, new Button { IsVirtual = true, AxisName = "Axis7", FromePositiveAxis = true, } }, // DPad Right
-                { 15, new Button { IsVirtual = true, AxisName = "Axis8", FromePositiveAxis = true, } }, // DPad Up
+                { 12, new Button { IsVirtual = true, AxisName = prefixA + "Axis7", FromeNegativeAxis = true, } }, // DPad Left
+                { 13, new Button { IsVirtual = true, AxisName = prefixA + "Axis8", FromeNegativeAxis = true, } }, // DPad Down
+                { 14, new Button { IsVirtual = true, AxisName = prefixA + "Axis7", FromePositiveAxis = true, } }, // DPad Right
+                { 15, new Button { IsVirtual = true, AxisName = prefixA + "Axis8", FromePositiveAxis = true, } }, // DPad Up
             };
         }
     }
