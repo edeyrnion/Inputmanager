@@ -59,8 +59,24 @@ namespace Matthias
         /// <returns>The value of the axis.</returns>
         public static float GetAxis(CAxis axisName)
         {
-            float value = controllerInput.GetAxis(controllerAxes[(int)axisName]);
-            return value;
+            float result = 0f;
+
+            if (axisName == CAxis.CameraHorizontal || axisName == CAxis.CameraVertical)
+            {
+                float value1 = controllerInput.GetAxis(controllerAxes[(int)axisName]) * Time.deltaTime;
+                float value2 = Input.GetAxis(axes[(int)axisName]);
+
+                result = Mathf.Max(Mathf.Abs(value1), Mathf.Abs(value2));
+            }
+            else
+            {
+                float value1 = controllerInput.GetAxis(controllerAxes[(int)axisName]);
+                float value2 = Input.GetAxis(axes[(int)axisName]);
+
+                result = Mathf.Max(Mathf.Abs(value1), Mathf.Abs(value2));
+            }
+
+            return result;
         }
 
         /// <summary>Returns true while the virtual button identified by buttonName is held down.</summary>
@@ -68,8 +84,17 @@ namespace Matthias
         /// <returns>True when an button has been pressed and not released.</returns>
         public static bool GetButton(CButton buttonName)
         {
-            bool value = controllerInput.GetButton(controllerButtons[(int)buttonName]);
-            return value;
+            bool result = false;
+
+            bool value1 = controllerInput.GetButton(controllerButtons[(int)buttonName]);
+            bool value2 = Input.GetButton(buttons[(int)buttonName]);
+
+            if (value1 == true || value2 == true)
+            {
+                result = true;
+            }
+
+            return result;
         }
 
         /// <summary>Returns true during the frame the user pressed down the virtual button identified by buttonName.</summary>
@@ -77,8 +102,17 @@ namespace Matthias
         /// <returns>True when an button has been pressed.</returns>
         public static bool GetButtonDown(CButton buttonName)
         {
-            bool value = controllerInput.GetButtonDown(controllerButtons[(int)buttonName]);
-            return value;
+            bool result = false;
+
+            bool value1 = controllerInput.GetButtonDown(controllerButtons[(int)buttonName]);
+            bool value2 = Input.GetButtonDown(buttons[(int)buttonName]);
+
+            if (value1 == true || value2 == true)
+            {
+                result = true;
+            }
+
+            return result;
         }
 
         /// <summary>Returns true the first frame the user releases the virtual button identified by buttonName.</summary>
@@ -86,8 +120,17 @@ namespace Matthias
         /// <returns>True when an button has been released.</returns>
         public static bool GetButtonUp(CButton buttonName)
         {
-            bool value = controllerInput.GetButtonUp(controllerButtons[(int)buttonName]);
-            return value;
+            bool result = false;
+
+            bool value1 = controllerInput.GetButtonUp(controllerButtons[(int)buttonName]);
+            bool value2 = Input.GetButtonUp(buttons[(int)buttonName]);
+
+            if (value1 == true || value2 == true)
+            {
+                result = true;
+            }
+
+            return result;
         }
 
         /// <summary>Returns true while the key identified by key is held down.</summary>
