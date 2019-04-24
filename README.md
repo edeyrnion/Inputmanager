@@ -3,7 +3,7 @@ Gamepad input manager for Unity 2018.
 
 ## Requirements
 
-Unity 2018.2. or higher
+Unity 2018.2 or higher.
 
 ## How to run
 
